@@ -41,7 +41,7 @@ class MT940:
         for line in lines:
 
             if state==IN_HEADER:
-                self.headers += line
+                self.headers.append(line)
                 if line =='940 00' or line == ':940:' or line == '940':
                     state=MESSAGE_HEADER
             else:
