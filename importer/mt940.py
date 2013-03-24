@@ -91,7 +91,7 @@ class MT940Message:
     def __init__(self):
         self.transaction_reference = ""
         self.acccount_id = ""
-        self.seq = ""
+        self.statement_number = ""
         self.open_date = None
         self.open_amount = None
         self.records=[]
@@ -103,7 +103,7 @@ class MT940Message:
         elif field == '25':
             self.account_id = data
         elif field == '28C' or field == '28':
-            self.seq = data
+            self.statement_number = data
         elif field == '60F':
             m = balance_re.match(data)
             if m:

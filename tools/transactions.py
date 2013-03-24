@@ -22,10 +22,14 @@ class TransactionTable:
     for row in csv_reader:
       if i==0:
         self.columns = [c.strip().replace(' ','_') for c in row]
+        print self.columns, ' ', len(self.columns)
       else:
-        self.data.append(row)
+          self.data.append(row[0:len(self.columns)])
+          if len(row) > len(self.columns):
+              print "WARNING: row fields without column names, truncated"
+              print row
       i += 1
-      print "imported line %d " % i 
+      print "imported line %d (%d fields) " % (i, len(row)) 
   
   def display(self, columns = None, column_width = 10):
 
@@ -97,7 +101,7 @@ class TransactionTable:
       while len(row)<col_len:
         row.append(None)
       if len(row) != col_len:
-        raise Exception('Row length does not match number of columns')
+        raise Exception('Row length %d does not match number of columns %d' % (len(row), col_len))
       row.append(values[ix])
       _data.append(row)
       
